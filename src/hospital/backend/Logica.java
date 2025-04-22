@@ -31,15 +31,26 @@ public class Logica {
     
     public void mostrarDatos(){
         
-        String sql= "SELECT * FROM platos";
+        String sql= "SELECT p.Tipo_documento AS "Tipo de documento",
+    p.Nro_documento AS "Número de documento",
+    p.Nombre_completo AS "Nombre del paciente",
+    p.Edad AS "Edad del paciente",
+    p.Genero AS "Género del paciente",
+    d.Fecha AS "Fecha del diagnóstico",
+    d.Hora AS "Hora del diagnóstico",
+    d.Observaciones AS "Observaciones",
+    m.Nombre AS "Nombre del médico"
+FROM DIAGNOSTICOS AS d
+INNER JOIN PACIENTE AS p ON p.ID_paciente = d.ID_paciente
+INNER JOIN MEDICOS AS m ON m.ID_medico = d.ID_medico";
         try(Connection conn =getConnection();
                PreparedStatement ps=conn.prepareStatement(sql);) {
             ResultSet rs=ps.executeQuery();
             while (rs.next()){
-                int id=rs.getInt(1);
-                String nombre=rs.getString(2);
+                int nro_documento=rs.getInt(1);
+            
                 
-                System.out.println("ID: "+id+ "Nombre:" +nombre);
+                System.out.println("ID: "+Nro_documento);
                 
             }rs.close();
             
