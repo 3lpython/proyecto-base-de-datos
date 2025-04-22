@@ -12,15 +12,18 @@ public class Logica {
         return DriverManager.getConnection(url, user, password);
     }
     
-    public void insertarDatos(String Nombre, String Contraseña, int ID_medico){
+    public void insertarDatos(String Nombre, String pass, int IDmedico){
         
-        String sql="INSERT INTO USUARIOS (Nombre, 'Contraseña', ID_medico) VALUES (?, ?, ?)";
+        String sql="INSERT INTO USUARIOS (Nombre, pass, ID_medico) VALUES (?, ?, ?)";
         try(Connection conn=getConnection();
                     PreparedStatement ps=conn.prepareStatement(sql);){
-            ps.setString(1, Nombre, 2, 'contraseña', 3, ID_medico);
+            ps.setString(1, Nombre);
+            ps.setString(2, Pass);
+            ps.setString(3, ID_medico);
+            
             ps.executeUpdate();
             System.out.println("Dato insertado");
-            ps.close();
+            
         }catch (SQLException e){
             System.out.println("Errores: " +e);
         }
