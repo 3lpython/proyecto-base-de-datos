@@ -12,14 +12,14 @@ public class Logica {
         return DriverManager.getConnection(url, user, password);
     }
     
-    public void insertarDatos(String Nombre, String pass, int IDmedico){
+    public void insertarDatos(String Nombre, String Pass, int IDmedico){
         
         String sql="INSERT INTO USUARIOS (Nombre, pass, ID_medico) VALUES (?, ?, ?)";
         try(Connection conn=getConnection();
                     PreparedStatement ps=conn.prepareStatement(sql);){
             ps.setString(1, Nombre);
             ps.setString(2, Pass);
-            ps.setString(3, ID_medico);
+            ps.setInt(3, IDmedico);
             
             ps.executeUpdate();
             System.out.println("Dato insertado");
@@ -76,15 +76,15 @@ public class Logica {
 
     }
 
-    public void actualizarDatos(String Nombre, String pass, int IDmedico, int IDusuario){
-        String sql ="UPDATE USUARIOS set Nombre =?, pass=?, ID_medico=? WHERE id=?";
+    public void actualizarDatos(String NuevoNombre, String NuevoPass, int NuevoIDmedico, int ActualizarIDusuario){
+        String sql ="UPDATE USUARIOS set Nombre =?, pass=?, ID_medico=? WHERE ID_usuario=?";
         
         try(Connection conn=getConnection();
             PreparedStatement ps=conn.prepareStatement(sql);){
-            ps.setString(1, Nombre);
-            ps.setString(2, Pass);
-            ps.setInt(3, ID_medico);
-            ps.setInt(4, ID_usuario);
+            ps.setString(1, NuevoNombre);
+            ps.setString(2, NuevoPass);
+            ps.setInt(3, NuevoIDmedico);
+            ps.setInt(4, ActualizarIDusuario);
             ps.executeUpdate();
             System.out.println("Dato actualizado.");
             ps.close();
@@ -96,12 +96,12 @@ public class Logica {
             
     }   
 
-    public void borrarDatos(int IDusuario){
-        String sql ="DELETE FROM USUARIOS WHERE id=?";
+    public void borrarDatos(int BorrarIDusuario){
+        String sql ="DELETE FROM USUARIOS WHERE ID_usuario=?";
         
         try(Connection conn=getConnection();
             PreparedStatement ps=conn.prepareStatement(sql);){
-            ps.setInt(1, IDusuario);
+            ps.setInt(1, BorrarIDusuario);
             ps.executeUpdate();
             System.out.println("Registro Borrado.");
             ps.close();

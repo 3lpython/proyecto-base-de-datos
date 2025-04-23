@@ -1,7 +1,8 @@
 
 package hospital;
-import hospital.Backend.Logica;
-import java.ulti.Scanner;
+import java.sql.*;
+import hospital.backend.Logica;
+import java.util.Scanner;
 
 public class Hospital {
 
@@ -10,29 +11,40 @@ public class Hospital {
         Scanner sc = new Scanner(System.in);
         Logica Lo = new Logica();
 
-       String Nombre = sc.newline();
-       String Pass = sc.newline();
-       int IDmedico = sc.newline();
+       // Insertar dato
+       System.out.print("Ingrese su nombre: ");
+        String nombre = sc.nextLine();
 
-       con.InsertarDatos(Nombre, Pass, IDmedico);
+        System.out.print("Ingrese la password: ");
+        String Pass = sc.nextLine();
+
+        System.out.print("Ingrese el ID del medico: ");
+        int IDmedico = sc.nextInt();
+        sc.nextLine();
+
+       Lo.insertarDatos(nombre, Pass, IDmedico);
 
        // Actualizar Dato
        System.out.println("Digite el nuevo nombre de usuario: ");
-       String nombre = sc.next();
+       String NuevoNombre = sc.nextLine();
+       
        System.out.println("Digite la nueva password: ");
-       String pass = sc.next();
-       System.out.println("Digite el nuevo IDmedico: ");
-       int IDmedico = sc.next();
+       String Nuevopass = sc.nextLine();
+       
+       System.out.println("Digite el nuevo ID del medico: ");
+       int NuevoIDmedico = Integer.parseInt(sc.nextLine());
+       
        System.out.println("Digite el ID del usuario: ");
-       int IDusuario = sc.next();
+       int ActualizarIDusuario = Integer.parseInt(sc.nextLine());
 
-       con.actualizarDatos(nombre,pass,IDmedico,IDusuario);
+       Lo.actualizarDatos(NuevoNombre, Nuevopass, NuevoIDmedico, ActualizarIDusuario);
 
        // Borrar dato
        System.out.println("Digite el ID del usuario a borrar: ");
-       int IDusuario = sc.next();
+       int BorrarIDusuario = Integer.parseInt(sc.nextLine());
 
-       con.borrarDatos(IDusuario);
+       Lo.borrarDatos(BorrarIDusuario);
+       //Mostrar dato
        Lo.mostrarDatos();
 
        
