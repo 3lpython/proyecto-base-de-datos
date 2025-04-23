@@ -29,34 +29,51 @@ public class Logica {
         }
     }
     
-    public void mostrarDatos(){
-        
-        String sql= "SELECT p.Tipo_documento AS "Tipo de documento",
-    p.Nro_documento AS "Número de documento",
-    p.Nombre_completo AS "Nombre del paciente",
-    p.Edad AS "Edad del paciente",
-    p.Genero AS "Género del paciente",
-    d.Fecha AS "Fecha del diagnóstico",
-    d.Hora AS "Hora del diagnóstico",
-    d.Observaciones AS "Observaciones",
-    m.Nombre AS "Nombre del médico"
-FROM DIAGNOSTICOS AS d
-INNER JOIN PACIENTE AS p ON p.ID_paciente = d.ID_paciente
-INNER JOIN MEDICOS AS m ON m.ID_medico = d.ID_medico";
-        try(Connection conn =getConnection();
-               PreparedStatement ps=conn.prepareStatement(sql);) {
-            ResultSet rs=ps.executeQuery();
-            while (rs.next()){
-                int nro_documento=rs.getInt(1);
-            
-                
-                System.out.println("ID: "+Nro_documento);
-                
-            }rs.close();
-            
-        }catch (SQLException e){
-            System.out.println("Errores: " +e);
+     public void mostrarDatos() {
+    String sql = "SELECT p.Tipo_documento AS \"Tipo de documento\", "
+            + "p.Nro_documento AS \"Número de documento\", "
+            + "p.Nombre_completo AS \"Nombre del paciente\", "
+            + "p.Edad AS \"Edad del paciente\", "
+            + "p.Genero AS \"Género del paciente\", "
+            + "d.Fecha AS \"Fecha del diagnóstico\", "
+            + "d.Hora AS \"Hora del diagnóstico\", "
+            + "d.Observaciones AS \"Observaciones\", "
+            + "m.Nombre AS \"Nombre del médico\" "
+            + "FROM DIAGNOSTICOS AS d "
+            + "INNER JOIN PACIENTE AS p ON p.ID_paciente = d.ID_paciente "
+            + "INNER JOIN MEDICOS AS m ON m.ID_medico = d.ID_medico";
+
+    try (Connection conn = getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql);
+         ResultSet rs = ps.executeQuery()) {
+
+        while (rs.next()) {
+            String tipoDocumento = rs.getString(1);
+            int nroDocumento = rs.getInt(2);
+            String nombrePaciente = rs.getString(3);
+            int edadPaciente = rs.getInt(4);
+            String generoPaciente = rs.getString(5);
+            Date fechaDiagnostico = rs.getDate(6);
+            Time horaDiagnostico = rs.getTime(7);
+            String observaciones = rs.getString(8);
+            String nombreMedico = rs.getString(9);
+
+            System.out.println("\n--- Registro ---");
+            System.out.println("Tipo documento: " + tipoDocumento);
+            System.out.println("Numero documento: " + nroDocumento);
+            System.out.println("Nombre paciente: " + nombrePaciente);
+            System.out.println("Edad: " + edadPaciente);
+            System.out.println("Genero: " + generoPaciente);
+            System.out.println("Fecha diagnostico: " + fechaDiagnostico);
+            System.out.println("Hora diagnostico: " + horaDiagnostico);
+            System.out.println("Observaciones: " + observaciones);
+            System.out.println("Medico: " + nombreMedico);
         }
+
+    } catch (SQLException e) {
+        System.out.println("Error al mostrar datos:" +e);
+    }
+
     }
 
     public void actualizarDato(String Nombre, String pass, int IDmedico, int IDusuario){
