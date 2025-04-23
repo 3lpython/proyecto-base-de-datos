@@ -76,7 +76,7 @@ public class Logica {
 
     }
 
-    public void actualizarDato(String Nombre, String pass, int IDmedico, int IDusuario){
+    public void actualizarDatos(String Nombre, String pass, int IDmedico, int IDusuario){
         String sql ="UPDATE USUARIOS set Nombre =?, pass=?, ID_medico=? WHERE id=?";
         
         try(Connection conn=getConnection();
@@ -96,7 +96,7 @@ public class Logica {
             
     }   
 
-    public void borrarDato(int IDusuario){
+    public void borrarDatos(int IDusuario){
         String sql ="DELETE FROM USUARIOS WHERE id=?";
         
         try(Connection conn=getConnection();
