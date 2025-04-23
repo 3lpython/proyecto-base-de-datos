@@ -15,6 +15,17 @@ public class Hospital {
        int IDmedico = sc.newline();
 
        con.InsertarDatos(Nombre, Pass, IDmedico);
+
+       System.out.println("Digite el nuevo nombre de usuario: ");
+       String nombre = sc.next();
+       System.out.println("Digite la nueva password: ");
+       String pass = sc.next();
+       System.out.println("Digite el nuevo IDmedico: ");
+       int IDmedico = sc.next();
+       System.out.println("Digite el ID del usuario: ");
+       int IDusuario = sc.next();
+
+       con.actualizarDato(nombre,pass,IDmedico,IDusuario);
     }
     
 }
