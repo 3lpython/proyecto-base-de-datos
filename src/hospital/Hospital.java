@@ -26,14 +26,14 @@ public class Hospital {
        System.out.println("Digite el ID del usuario: ");
        int IDusuario = sc.next();
 
-       con.actualizarDato(nombre,pass,IDmedico,IDusuario);
+       con.actualizarDatos(nombre,pass,IDmedico,IDusuario);
 
        // Borrar dato
        System.out.println("Digite el ID del usuario a borrar: ");
        int IDusuario = sc.next();
 
        con.borrarDatos(IDusuario);
-       Lo.mostrarDato();
+       Lo.mostrarDatos();
 
        
     }
