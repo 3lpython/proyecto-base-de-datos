@@ -59,15 +59,18 @@ INNER JOIN MEDICOS AS m ON m.ID_medico = d.ID_medico";
         }
     }
 
-    public void actualizarDato(String Nombre, String pass, int IDmedico){
+    public void actualizarDato(String Nombre, String pass, int IDmedico, int IDusuario){
         String sql ="UPDATE USUARIOS set Nombre =?, pass=?, ID_medico=? WHERE id=?";
+        
         try(Connection conn=getConnection();
             PreparedStatement ps=conn.prepareStatement(sql);){
             ps.setString(1, Nombre);
             ps.setString(2, Pass);
-            ps.setString(3, ID_medico);
-            ps.setString(4, ID_usuario);
+            ps.setInt(3, ID_medico);
+            ps.setInt(4, ID_usuario);
+            ps.executeUpdate();
             System.out.println("Dato actualizado.");
+            ps.close();
             
         }catch (SQLException e){
             System.out.println("Errores: " +e);
@@ -75,5 +78,21 @@ INNER JOIN MEDICOS AS m ON m.ID_medico = d.ID_medico";
             
             
     }   
-    
+
+    public void borrarDato(int IDusuario){
+        String sql ="DELETE FROM USUARIOS WHERE id=?";
+        
+        try(Connection conn=getConnection();
+            PreparedStatement ps=conn.prepareStatement(sql);){
+            ps.setInt(1, IDusuario);
+            ps.executeUpdate();
+            System.out.println("Registro Borrado.");
+            ps.close();
+
+        }catch (SQLException e){
+            System.out.println("Errores: " +e);
+        }
+            
+            
+    }
 }
