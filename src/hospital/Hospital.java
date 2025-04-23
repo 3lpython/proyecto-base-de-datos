@@ -32,7 +32,8 @@ public class Hospital {
        System.out.println("Digite el ID del usuario a borrar: ");
        int IDusuario = sc.next();
 
-       con.borrarDato(IDusuario);
+       con.borrarDatos(IDusuario);
+       Lo.mostrarDato();
 
        
     }
