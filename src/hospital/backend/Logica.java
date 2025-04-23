@@ -59,5 +59,21 @@ INNER JOIN MEDICOS AS m ON m.ID_medico = d.ID_medico";
         }
     }
 
+    public void actualizarDato(String Nombre, String pass, int IDmedico){
+        String sql ="UPDATE USUARIOS set Nombre =?, pass=?, ID_medico=? WHERE id=?";
+        try(Connection conn=getConnection();
+            PreparedStatement ps=conn.prepareStatement(sql);){
+            ps.setString(1, Nombre);
+            ps.setString(2, Pass);
+            ps.setString(3, ID_medico);
+            ps.setString(4, ID_usuario);
+            System.out.println("Dato actualizado.");
+            
+        }catch (SQLException e){
+            System.out.println("Errores: " +e);
+        }
+            
+            
+    }   
     
 }
